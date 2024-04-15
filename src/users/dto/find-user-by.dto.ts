@@ -3,6 +3,8 @@
 // ! lib
 // class-validator
 import { IsString, IsEmail } from 'class-validator';
+// mongoose
+import { ObjectId } from 'mongoose';
 
 export class FindUserByNicknameDto {
   @IsString()
@@ -16,5 +18,5 @@ export class FindUserByEmailDto {
 
 export class FindUserByIdDto {
   @IsString()
-  readonly id: string;
+  readonly id: ObjectId;
 }

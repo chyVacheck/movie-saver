@@ -31,11 +31,18 @@ export class UsersController {
 
   @UseGuards(AuthGuard)
   @Get()
-  async findAllUsers(@Req() req: AuthenticatedRequest) {
-    console.log(req.user); // todo удалить потом
+  async findAllUsers() {
     const users: IUser[] = await this.userService.findAll();
 
     return { data: users };
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('/me')
+  async findCurrentUser(@Req() req: AuthenticatedRequest) {
+    const user = await this.userService.findOneById({ id: req.user.sub });
+
+    return { data: user };
   }
 
   @UseGuards(AuthGuard)
